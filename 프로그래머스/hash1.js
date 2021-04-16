@@ -1,69 +1,12 @@
-// function solution(participant, completion) {
-//   //
-//   var participant = ["a", "b", "c", "a"];
-//   var completion = ["a", "b", "a"];
-
-//   var newList = participant.reduce((acc, p) => {
-//     console.log(acc);
-//     console.log("p " + p);
-//     console.log("acc[p] " + acc[p]);
-//     acc[p] = acc[p] ? acc[p] + 1 : 1;
-//     console.log(acc);
-//     return acc;
-//   }, {});
-
-//   completion.forEach((c) => {
-//     if (newList[c]) {
-//       newList[c] -= 1;
-//     }
-//     if (newList[c] === 0) {
-//       delete newList[c];
-//     }
-//   });
-
-//   return Object.keys(newList)[0];
-// }
-
-function solution(participant, completion) {
-  var newList = completion.reduce((acc, c) => {
-    acc[c] = acc[c] ? acc[c] + 1 : 1;
-    return acc;
-  }, {});
-  return participant.find((c) => {
-    if (newList[c]) {
-      newList[c] -= 1;
-    } else {
-      return true;
-    }
-  });
-}
-
-// solution([], []);
-
-var participants = ["a", "b", "c", "a"];
-var completions = ["a", "b", "a"];
-
-const myMap = new Map();
-
-for (const participant of participants) {
-  if (!myMap.get(participant)) {
-    myMap.set(participant, 1);
-  } else {
-    myMap.set(participant, myMap.get(participant) + 1);
-  }
-}
-
-for (const completion of completions) {
-  if (myMap.get(completion)) {
-    myMap.set(completion, myMap.get(completion) - 1);
-  }
-}
-
-for (const participant of participants) {
-  if (myMap.get(participant) && myMap.get(participant) >= 1) {
-    answer = participant;
-  }
-}
+// [해시]완주하지 못한 선수
+/**
+ * 마라톤 경기 중 한 명의 선수를 제외하고 완주. 완주 못한 선수의 이름을 반환.
+ * 참여자 이름들 participant 배열. / 완주자 이름들 completion 배열.
+ * 참여자들의 이름은 중복 가능.
+ * 참여자 수 1~100,000
+ * 참가자 이름은 알파벳 소문자로, 20자 이하.
+ * completion 길이는 participant 길이보다 1 작다.
+ */
 
 function solution(participant, completion) {
   let completeMap = new Map();
@@ -81,11 +24,10 @@ function solution(participant, completion) {
   }
 }
 
-function solution(participant, completion) {
-  participant.sort();
-  completion.sort();
+// const participant = ["marina", "josipa", "nikola", "vinko", "filipa"];
+// const completion = ["josipa", "filipa", "marina", "nikola"];
 
-  for (let i in participant) {
-    if (participant[i] !== completion[i]) return participant[i];
-  }
-}
+const participant = ["mislav", "stanko", "mislav", "ana"];
+const completion = ["stanko", "ana", "mislav"];
+
+console.log(solution(participant, completion));
