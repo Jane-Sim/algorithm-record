@@ -30,17 +30,15 @@ function solution(n, lost, reserve) {
   if (!newReserve.length || !newLost.length) return n - newLost.length;
 
   for (let i = 0; i < newLost.length; i++) {
-    // console.log(newLost[i]);
-    if (!newReserve.length) break;
-    newReserve.some((r) => {
-      //   console.log(r);
-      if (newLost[i] === r - 1 || newLost[i] === r + 1) {
-        save.push(newLost[i]);
-        newReserve.splice(newReserve.indexOf(newLost[i]), 1);
-        // console.log(newReserve);
-        return true;
-      }
-    });
+    let lost_user = newLost[i];
+    // console.log(lost_user);
+    if (newReserve.indexOf(lost_user - 1) > -1) {
+      save.push(lost_user - 1);
+      newReserve.splice(newReserve.indexOf(lost_user - 1), 1);
+    } else if (newReserve.indexOf(lost_user + 1) > -1) {
+      save.push(lost_user + 1);
+      newReserve.splice(newReserve.indexOf(lost_user + 1), 1);
+    }
   }
 
   return save.length > 0
