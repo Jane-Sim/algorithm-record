@@ -7,7 +7,7 @@
  * 학생 수. 2~30명
  * 도난 당한 학생 수 1~n. 중복X
  * 여벌 체육복 있는 학생 수 1~n. 중복X
- * 여벌 체육복을 가져온 학생도 도난당했을 수 있다. -> 그런 경우 못 빌려줌. (최대 2개)
+ * 여벌 체육복을 가져온 학생도 도난당했을 수 있다. -> 그런 경우 못 빌려줌. (최대 여벌 2개)
  * 총 학생 수 n, 도난당한 학생 번호 배열 lost, 여벌 체육복 가진 학생 번호 배열 reserve
  *
  * 예시
@@ -21,17 +21,13 @@ function solution(n, lost, reserve) {
   let save = [];
   n = 10;
   lost = [1, 2, 3, 5, 6, 7, 11];
-  reserve = [2];
+  reserve = [2, 6, 11, 12];
   let newLost = lost.filter((l) => !reserve.find((r) => l === r));
   let newReserve = reserve.filter((r) => !lost.find((l) => r === l));
-  console.log(newLost);
-  console.log(newReserve);
 
   if (!newReserve.length || !newLost.length) return n - newLost.length;
 
-  for (let i = 0; i < newLost.length; i++) {
-    let lost_user = newLost[i];
-    // console.log(lost_user);
+  for (let lost_user of newLost) {
     if (newReserve.indexOf(lost_user - 1) > -1) {
       save.push(lost_user - 1);
       newReserve.splice(newReserve.indexOf(lost_user - 1), 1);

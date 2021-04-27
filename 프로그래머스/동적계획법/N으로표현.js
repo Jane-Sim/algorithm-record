@@ -42,12 +42,11 @@ function solution(N, number) {
     // ex) join("") -> ["555"]
     // ex) ["555"] * 1 -> [555]
     s.push(new Set([new Array(i).fill(N).join("") * 1]));
-    console.log(s);
-    // j =1 ; i = 3
+    // j =1 ; i = 3. j가 1부터 시작하는 이유는, 첫 요소는 숫자를 연속해서 붙인 값이기 때문.
     for (let j = 1; j <= i; j++) {
-      //  const x1 of .s[3] = [{5}]
+      //  const x1 of s[3] = [{5}]
       for (const x1 of [...s[j]]) {
-        // const x2 of .s[2] = [{55, 10, 0, 25, 1}]
+        // const x2 of s[2] = [{55, 10, 0, 25, 1}]
         for (const x2 of [...s[i - j]]) {
           // 5 + 55 / 5 + 10
           s[i].add(x1 + x2);
